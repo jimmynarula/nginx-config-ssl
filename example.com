@@ -1,40 +1,40 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name accessiblecms.com.au www.accessiblecms.com.au;
+    server_name example.com www.example.com;
 
-    return 301 https://accessiblecms.com.au$request_uri;
+    return 301 https://example.com$request_uri;
 }
 
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
 
-    server_name www.accessiblecms.com.au;
-    ssl_certificate /etc/letsencrypt/live/accessiblecms.com.au-0001/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/accessiblecms.com.au-0001/privkey.pem;
+    server_name www.example.com;
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
-    return 301 https://accessiblecms.com.au$request_uri;
+    return 301 https://example.com$request_uri;
 }
 
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
-    server_name accessiblecms.com.au;
+    server_name example.com;
     ssl on;
-    ssl_certificate /etc/letsencrypt/live/accessiblecms.com.au-0001/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/accessiblecms.com.au-0001/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     ssl_stapling on;
     ssl_stapling_verify on;
 
-    error_log /var/log/nginx/acms_error.log;
+    error_log /var/log/nginx/example.com_error.log;
 
-    root /var/www/acms-portal/public;
+    root /var/www/example.com/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
